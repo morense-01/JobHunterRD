@@ -1,0 +1,87 @@
+scheduler:
+  interval_minutes: 20
+
+provinces:
+  - Santo Domingo Oeste
+  - Distrito Nacional
+  - San Cristóbal
+  - Haina
+
+portals:
+  aldaba:
+    enabled: true
+    base_url: "https://www.aldaba.com"
+  computrabajo:
+    enabled: true
+    base_url: "https://www.computrabajo.com.do"
+  linkedin:
+    enabled: true
+    base_url: "https://www.linkedin.com/jobs"
+  google_jobs:
+    enabled: false
+    base_url: "https://www.google.com/search"
+
+positive_keywords:
+  - Gerente Tecnología
+  - Gerente TI
+  - Gerente IT
+  - Director Tecnología
+  - CIO
+  - CTO
+  - IT Manager
+  - Technology Manager
+  - Infrastructure Manager
+  - Infrastructure Lead
+  - Systems Manager
+  - Cloud Engineer
+  - Cloud Architect
+  - Network Engineer
+  - Infrastructure Engineer
+  - DevOps
+  - Cybersecurity
+  - Information Security
+  - IT Operations
+  - Systems Administrator
+  - VMware
+  - Azure
+  - AWS
+  - Linux
+  - Windows Server
+  - SAP
+  - Odoo
+  - Dynamics
+
+negative_keywords:
+  - Help Desk
+  - Mesa de Ayuda
+  - Soporte Nivel 1
+  - Técnico PC
+  - Técnico en PC
+  - Call Center
+  - Pasante
+  - Intern
+  - Junior
+  - Prácticas
+  - Freelance
+  - Vendedor
+  - Promotor
+
+excluded_companies:
+  - ProContratista
+  - UNIPAGO
+  - DOCALSA
+  - Plásticos del Caribe
+  - MADECO
+
+telegram:
+  bot_token: ""
+  chat_id: ""
+
+email:
+  enabled: false
+  smtp_host: ""
+  smtp_port: 587
+  smtp_user: ""
+  smtp_password: ""
+  from_addr: ""
+  to_addr: ""
