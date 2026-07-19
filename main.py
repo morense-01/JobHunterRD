@@ -1,3 +1,4 @@
+import argparse
 import signal
 import sys
 from pathlib import Path
@@ -22,7 +23,7 @@ LOGS_DIR = BASE_DIR / "logs"
 DB_PATH = DATA_DIR / "jobhunter.db"
 
 
-def main() -> None:
+def bootstrap() -> tuple:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     setup_logger(LOGS_DIR)
@@ -73,6 +74,17 @@ def main() -> None:
     for scraper in scrapers:
         orchestrator.register_scraper(scraper)
 
+    return settings, orchestrator
+
+
+def run_once() -> None:
+    _, orchestrator = bootstrap()
+    orchestrator.run_once()
+
+
+def run_scheduler() -> None:
+    settings, orchestrator = bootstrap()
+
     def run_job() -> None:
         orchestrator.run_once()
 
@@ -105,4 +117,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="JobHunterRD - Buscador de empleo IT")
+    parser.add_argument("--once", action="store_true", help="Ejecutar un solo ciclo y salir")
+    args = parser.parse_args()
+
+    if args.once:
+        run_once()
+    else:
+        run_scheduler()
