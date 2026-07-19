@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -18,13 +19,19 @@ class FilterEngine:
         positive_keywords: list[str],
         negative_keywords: list[str],
         excluded_companies: list[str],
+        max_days_old: int = 2,
     ) -> None:
         self._provinces = [p.strip().lower() for p in provinces]
         self._positive_keywords = [kw.strip().lower() for kw in positive_keywords]
         self._negative_keywords = [kw.strip().lower() for kw in negative_keywords]
         self._excluded_companies = [c.strip().lower() for c in excluded_companies]
+        self._max_days_old = max_days_old
 
     def evaluate(self, job: Job) -> FilterResult:
+        result = self._check_recency(job)
+        if not result.passed:
+            return result
+
         result = self._check_excluded_company(job)
         if not result.passed:
             return result
@@ -41,6 +48,17 @@ class FilterEngine:
         if not result.passed:
             return result
 
+        return FilterResult(passed=True)
+
+    def _check_recency(self, job: Job) -> FilterResult:
+        cutoff = datetime.now() - timedelta(days=self._max_days_old)
+        pub_date = job.publication_date or job.found_at
+        if pub_date < cutoff:
+            return FilterResult(
+                passed=False,
+                reason=f"Vacante muy antigua: {pub_date.date()}",
+                rejected_by="recency",
+            )
         return FilterResult(passed=True)
 
     def _check_excluded_company(self, job: Job) -> FilterResult:
