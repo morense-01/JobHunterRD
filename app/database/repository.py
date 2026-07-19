@@ -27,13 +27,16 @@ class DatabaseRepository:
             return session.query(Vacancy).filter(Vacancy.url == url).first() is not None
 
     def save_job(self, job: Job) -> Optional[Vacancy]:
-        if self.vacancy_exists_by_hash(job.hash):
-            with self.get_session() as session:
-                existing = session.query(Vacancy).filter(Vacancy.hash == job.hash).first()
-                if existing:
-                    existing.last_seen_at = datetime.now()
-                    session.commit()
-            return None
+        with self.get_session() as session:
+            existing = (
+                session.query(Vacancy)
+                .filter((Vacancy.hash == job.hash) | (Vacancy.url == job.url))
+                .first()
+            )
+            if existing:
+                existing.last_seen_at = datetime.now()
+                session.commit()
+                return None
 
         vacancy = Vacancy(
             portal=job.portal,

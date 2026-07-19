@@ -60,24 +60,27 @@ class Orchestrator:
                 logger.info(f"{portal_name}: {result.count} vacantes encontradas")
 
                 for job in result.jobs:
-                    filter_result = self._filter_engine.evaluate(job)
-                    if not filter_result.passed:
-                        logger.debug(f"Filtrado: {job.title} en {job.company} -> {filter_result.reason}")
-                        total_filtered += 1
-                        continue
+                    try:
+                        filter_result = self._filter_engine.evaluate(job)
+                        if not filter_result.passed:
+                            logger.debug(f"Filtrado: {job.title} en {job.company} -> {filter_result.reason}")
+                            total_filtered += 1
+                            continue
 
-                    saved = self._repository.save_job(job)
-                    if saved is not None:
-                        total_new += 1
-                        logger.info(f"Nueva vacante: {job.title} - {job.company} ({portal_name})")
+                        saved = self._repository.save_job(job)
+                        if saved is not None:
+                            total_new += 1
+                            logger.info(f"Nueva vacante: {job.title} - {job.company} ({portal_name})")
 
-                        sent, error = self._notifier.send_vacancy(saved)
-                        if sent:
-                            self._repository.mark_as_notified(saved.id)
-                            self._repository.register_notification(saved.id, "telegram", True)
-                            total_sent += 1
-                        else:
-                            self._repository.register_notification(saved.id, "telegram", False, error)
+                            sent, error = self._notifier.send_vacancy(saved)
+                            if sent:
+                                self._repository.mark_as_notified(saved.id)
+                                self._repository.register_notification(saved.id, "telegram", True)
+                                total_sent += 1
+                            else:
+                                self._repository.register_notification(saved.id, "telegram", False, error)
+                    except Exception as e:
+                        logger.warning(f"{portal_name}: Error procesando vacante '{job.title}': {e}")
 
             except Exception as e:
                 logger.error(f"{portal_name}: Error inesperado: {e}")

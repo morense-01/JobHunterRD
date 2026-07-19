@@ -60,7 +60,7 @@ class LinkedInScraper(BaseScraper):
                 return None
             title = title_el.get_text(strip=True)
 
-            link_el = item.select_one("a[href*='/jobs/view']")
+            link_el = item.select_one("a[href*='/jobs/view'], a[href*='/jobs/search']")
             href = link_el.get("href") if link_el else ""
             url = href.split("?")[0] if href else ""
 
