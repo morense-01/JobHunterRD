@@ -40,6 +40,7 @@ class EmailConfig(BaseModel):
 
 class Settings(BaseModel):
     scheduler: SchedulerConfig = SchedulerConfig()
+    max_days_old: int = 30
     provinces: list[str] = Field(default_factory=list)
     portals: PortalsConfig = PortalsConfig()
     positive_keywords: list[str] = Field(default_factory=list)

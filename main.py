@@ -38,6 +38,7 @@ def bootstrap() -> tuple:
         positive_keywords=settings.positive_keywords,
         negative_keywords=settings.negative_keywords,
         excluded_companies=settings.excluded_companies,
+        max_days_old=settings.max_days_old,
     )
 
     notifier = TelegramNotifier(

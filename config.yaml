@@ -1,6 +1,8 @@
 scheduler:
   interval_minutes: 20
 
+max_days_old: 30
+
 provinces:
   - Santo Domingo Oeste
   - Distrito Nacional
@@ -22,49 +24,113 @@ portals:
     base_url: "https://www.google.com/search"
 
 positive_keywords:
-  - Gerente Tecnología
-  - Gerente TI
-  - Gerente IT
-  - Director Tecnología
-  - CIO
-  - CTO
-  - IT Manager
-  - Technology Manager
-  - Infrastructure Manager
-  - Infrastructure Lead
-  - Systems Manager
-  - Cloud Engineer
-  - Cloud Architect
-  - Network Engineer
-  - Infrastructure Engineer
-  - DevOps
-  - Cybersecurity
-  - Information Security
-  - IT Operations
-  - Systems Administrator
-  - VMware
-  - Azure
-  - AWS
-  - Linux
-  - Windows Server
-  - SAP
-  - Odoo
-  - Dynamics
+  - tecnologia
+  - tecnología
+  - informatica
+  - informática
+  - sistemas
+  - systems
+  - IT
+  - TI
+  - computacion
+  - computación
+  - digital
+  - tecnológico
+  - Gerente
+  - Director
+  - Jefe
+  - Coordinador
+  - Encargado
+  - Supervisor
+  - Especialista
+  - Analista
+  - Ingeniero
+  - Arquitecto
+  - Administrador
+  - Consultor
+  - Soporte Tecnico
+  - infraestructura
+  - infrastructure
+  - cloud
+  - azure
+  - aws
+  - red
+  - network
+  - seguridad
+  - security
+  - ciberseguridad
+  - cybersecurity
+  - servidor
+  - server
+  - windows server
+  - linux
+  - devops
+  - sap
+  - odoo
+  - dynamics
+  - oracle
+  - sql
+  - base de datos
+  - database
+  - erp
+  - crm
+  - project
+  - proyecto
+  - datos
+  - data
+  - business intelligence
+  - bi
+  - power bi
+  - microsoft 365
+  - office 365
+  - sharepoint
+  - vmware
+  - virtualizacion
+  - virtualización
+  - firewall
+  - fortinet
+  - cisco
+  - redes
+  - telecomunicaciones
+  - telecommunications
+  - hardware
+  - software
 
 negative_keywords:
-  - Help Desk
-  - Mesa de Ayuda
-  - Soporte Nivel 1
-  - Técnico PC
-  - Técnico en PC
-  - Call Center
-  - Pasante
-  - Intern
-  - Junior
-  - Prácticas
-  - Freelance
+  - Mercadeo
+  - Marketing
+  - Publicidad
+  - Advertising
+  - Ventas
+  - Sales
+  - Comercial
   - Vendedor
   - Promotor
+  - Community Manager
+  - Diseñador
+  - Designer
+  - Diseño Grafico
+  - Graphic Design
+  - Desarrollador
+  - Developer
+  - Programador
+  - Programmer
+  - Software Engineer
+  - Frontend
+  - Backend
+  - Full Stack
+  - Fullstack
+  - Mobile
+  - iOS
+  - Android
+  - Web Developer
+  - PHP
+  - Python Developer
+  - Java Developer
+  - Javascript
+  - React
+  - Angular
+  - Node
 
 excluded_companies:
   - ProContratista
