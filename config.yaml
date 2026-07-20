@@ -11,7 +11,7 @@ provinces:
 
 portals:
   aldaba:
-    enabled: true
+    enabled: false
     base_url: "https://www.aldaba.com"
   computrabajo:
     enabled: true
