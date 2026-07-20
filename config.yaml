@@ -1,7 +1,7 @@
 scheduler:
   interval_minutes: 20
 
-max_days_old: 30
+max_days_old: 2
 
 provinces:
   - Santo Domingo Oeste
